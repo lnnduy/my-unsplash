@@ -4,4 +4,264 @@ body {
   font-family: "Poppins";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #333;
+  min-height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.5s;
+}
+
+.container {
+  width: 864px;
+  height: 764px;
+  max-width: 960px;
+  max-height: 764px;
+  background-color: white;
+  border-radius: 24px;
+  padding: 0px 48px;
+  position: relative;
+  overflow: auto;
+}
+
+.form {
+  width: 100%;
+  display: block;
+}
+
+.form-control {
+  margin-top: 12px;
+}
+
+.form-control label {
+  font-size: 0.85rem;
+  display: block;
+  margin: 0;
+}
+
+.form-control input {
+  width: 100%;
+  display: block;
+  padding: 15px 12px;
+  border-radius: 12px;
+  border: 1px solid #4f4f4f;
+  font-size: 1rem;
+  outline: none;
+  margin-top: 2px;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 864px;
+  height: 764px;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.backdrop {
+  width: 864px;
+  height: 764px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.2);
+  animation: fadeout 0.25s linear;
+}
+
+.modal-container {
+  display: block;
+  top: 30px;
+  background-color: white;
+  padding: 20px 24px;
+  border-radius: 12px;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  animation: zoomin 0.25s linear;
+}
+
+.modal-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-actions button {
+  padding: 15px 16px;
+  border: none;
+  outline: none;
+  font-weight: 700;
+}
+
+.modal-actions button:hover {
+  cursor: pointer;
+}
+
+.modal-actions .btn-cancel {
+  background-color: transparent;
+  margin-right: 5px;
+  border-radius: 12px;
+  color: #707070;
+}
+
+.modal-actions .btn-cancel:hover {
+  background-color: #efefef;
+  color: #303030;
+}
+
+.modal-actions .btn-confirm {
+  background-color: #3db46d;
+  color: white;
+  border-radius: 12px;
+}
+
+.modal-actions .btn-confirm:hover {
+  background-color: #1d8f4b;
+}
+
+.btn-upload-from-url {
+  width: 95px;
+  padding: 10px 10px 10px 15px;
+  border: none;
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
+  border-right: none;
+  outline: none;
+  background-color: #eeeeee;
+}
+
+.btn-upload-from-pc {
+  width: 95px;
+  padding: 10px 15px 10px 10px;
+  border: none;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+  border-left: none;
+  outline: none;
+  background-color: #eeeeee;
+}
+
+.btn-upload-from-url:hover,
+.btn-upload-from-pc:hover {
+  cursor: pointer;
+}
+
+.btn-upload-from-url.selected,
+.btn-upload-from-pc.selected {
+  background-color: #56dce6;
+  font-weight: 700;
+  color: white;
+}
+
+.drop-zone {
+  width: 100%;
+  border: 3px dashed #97bef4;
+  margin-top: 20px;
+}
+
+.drop-zone.is-drag-over {
+  background-color: rgba(112, 170, 246, 0.459);
+}
+
+.drop-zone:hover {
+  border: 3px dashed #6e9cdd;
+}
+
+.drop-zone-image {
+  display: block;
+  width: 150px;
+  margin: 50px auto 0 auto;
+}
+
+.drop-zone:hover .drop-zone-image {
+  transform: scale(1.3);
+}
+
+.drop-zone-placeholder {
+  text-align: center;
+  color: #bdbdbd;
+  font-size: 1rem;
+  margin: 30px 0;
+}
+.drop-zone:hover .drop-zone-placeholder {
+  color: #707070;
+  cursor: pointer;
+}
+
+.btn-browse {
+  background-color: #2f80ed;
+  color: white;
+  border: none;
+  padding: 1em 2em;
+  font-size: 1rem;
+  border-radius: 10px;
+  margin: 0 auto;
+  outline: none;
+}
+
+.btn-browse:hover {
+  cursor: pointer;
+  background-color: #0f54ad;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar > span {
+  width: 30%;
+  height: 6px;
+  position: absolute;
+  background-color: #2f80ed;
+  border-radius: 8px;
+  animation: anim 0.75s infinite linear;
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomin {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes anim {
+  0% {
+    left: -30%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

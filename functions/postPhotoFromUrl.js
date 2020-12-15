@@ -9,10 +9,10 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
 });
 
-const postPhoto = async (req, res) => {
+const postPhotoFromUrl = async (req, res) => {
   try {
-    const { label } = req.body;
-    const uploadResult = await cloudinary.uploader.upload(req.file.path, {
+    const { label, url } = req.body;
+    const uploadResult = await cloudinary.uploader.upload(url, {
       public_id: "lnnduy/my-unsplash/" + req.user._id + "_" + Date.now(),
       overwrite: true,
       resource_type: "image",
@@ -45,4 +45,4 @@ const postPhoto = async (req, res) => {
   }
 };
 
-module.exports = postPhoto;
+module.exports = postPhotoFromUrl;

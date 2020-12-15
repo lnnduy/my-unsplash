@@ -21,7 +21,7 @@ passport.use(
   new JWTstrategy(
     {
       secretOrKey: process.env.JWT_SECRET,
-      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken("secret_token"),
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     },
     async (token, done) => {
       try {
@@ -37,9 +37,14 @@ passport.use(
 router.post("/signup", require("../functions/signup"));
 router.post("/login", require("../functions/login"));
 router.post(
-  "/photos",
+  "/photos/pc",
   [upload.single("image"), passport.authenticate("jwt", { session: false })],
-  require("../functions/postPhoto")
+  require("../functions/postPhotoFromPc")
+);
+router.post(
+  "/photos/url",
+  [upload.single("image"), passport.authenticate("jwt", { session: false })],
+  require("../functions/postPhotoFromUrl")
 );
 router.get(
   "/photos",
