@@ -28,6 +28,28 @@ function LoginPage() {
     }
   };
 
+  const signup = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post("/api/signup", form);
+      const { data } = res;
+
+      if (!data.success) {
+        console.log(data);
+        return;
+      }
+
+      const { token } = data.data;
+
+      localStorage.setItem("token", token);
+
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleInputChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -49,6 +71,21 @@ function LoginPage() {
           onChange={handleInputChange}
         />
         <button type="submit">Login</button>
+      </form>
+      <h3>Signup</h3>
+      <form onSubmit={signup}>
+        <input
+          name="username"
+          placeholder="hahaha"
+          onChange={handleInputChange}
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="hihihi"
+          onChange={handleInputChange}
+        />
+        <button type="submit">Signup</button>
       </form>
     </div>
   );

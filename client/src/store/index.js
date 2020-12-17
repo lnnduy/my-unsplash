@@ -3,6 +3,7 @@ import { createStore } from "redux";
 const SET_PHOTOS = "SET_PHOTOS";
 const ADD_PHOTO = "ADD_PHOTO";
 const DELETE_PHOTO = "DELETE_PHOTO";
+const SET_SEARCH_STRING = "SET_SEARCH_STRING";
 const SET_STATUS = "SET_STATUS";
 
 const setPhotos = (photos) => {
@@ -20,15 +21,19 @@ const deletePhoto = (photoId) => {
 const setLoading = (photoId) => {
   return { type: SET_STATUS, payload: { photoId } };
 };
+const setSearchString = (searchString) => {
+  return { type: SET_SEARCH_STRING, payload: { searchString } };
+};
 
 export const actions = {
   setPhotos,
   addPhoto,
   deletePhoto,
   setLoading,
+  setSearchString,
 };
 
-const reducer = (state = { photos: [] }, action) => {
+const reducer = (state = { photos: [], searchString: "" }, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -41,7 +46,7 @@ const reducer = (state = { photos: [] }, action) => {
 
     case ADD_PHOTO: {
       const { photo } = payload;
-      state = { photos: [photo, ...state.photos] };
+      state = { ...state, photos: [photo, ...state.photos] };
       return state;
     }
 
@@ -52,6 +57,7 @@ const reducer = (state = { photos: [] }, action) => {
       );
 
       state = {
+        ...state,
         photos: [
           ...state.photos.slice(0, photoIndex),
           ...state.photos.slice(photoIndex + 1),
@@ -68,6 +74,7 @@ const reducer = (state = { photos: [] }, action) => {
       );
 
       state = {
+        ...state,
         photos: [
           ...state.photos.slice(0, photoIndex),
           { ...state.photos[photoIndex], loading: true },
@@ -77,6 +84,16 @@ const reducer = (state = { photos: [] }, action) => {
 
       return state;
     }
+
+    case SET_SEARCH_STRING: {
+      const { searchString } = payload;
+
+      state = { ...state, searchString };
+      console.log(searchString);
+
+      return state;
+    }
+
     default:
       return state;
   }

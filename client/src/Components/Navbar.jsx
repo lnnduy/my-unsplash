@@ -142,6 +142,9 @@ function Navbar() {
                 outline: "none",
               }}
               placeholder="Search by name"
+              onChange={(e) =>
+                dispatch(actions.setSearchString(e.target.value))
+              }
             />
           </div>
         </div>

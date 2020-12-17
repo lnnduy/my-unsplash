@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index"
+    "dev": "nodemon index",
+    "start": "node index",
+    "install:client": "cd client && yarn install",
+    "build": "cd client && yarn build",
+    "heroku-postbuild": "npm run install:client && npm run build"
   },
   "keywords": [],
   "author": "",

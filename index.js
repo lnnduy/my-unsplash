@@ -14,7 +14,11 @@ mongoose.connect(
   { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true },
   () => console.log("Connected to database")
 );
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(cors());
 app.use(express.json());
 
@@ -22,7 +26,9 @@ app.use("/api", require("./routes"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
-  app.get("*", path.join(__dirname, "client", "build", "index.html"));
+  app.get("*", (req, res) =>
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"))
+  );
 }
 
 const PORT = process.env.PORT || 5000;

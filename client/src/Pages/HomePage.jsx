@@ -13,6 +13,7 @@ function HomePage() {
   const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [selectedPhotoId, setSelectedPhotoId] = useState(null);
+  const { searchString } = useSelector((state) => state);
 
   const loadPhotos = async () => {
     try {
@@ -56,7 +57,14 @@ function HomePage() {
     <div>
       <Navbar />
       <div className="masonry-layout">
-        {photos?.map((photo) => (
+        {(searchString.trim() === ""
+          ? photos
+          : photos.filter((photo) =>
+              photo.label
+                .toLowerCase()
+                .includes(searchString.trim().toLowerCase())
+            )
+        )?.map((photo) => (
           <div key={photo._id} className="photo-container">
             <div className="say-no-to-clean-code" />
             <img src={photo.url} alt={photo.label} />
