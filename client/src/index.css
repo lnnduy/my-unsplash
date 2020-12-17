@@ -1,3 +1,5 @@
+/* 380+ lines */
+
 body {
   margin: 0;
   padding: 0;
@@ -262,6 +264,128 @@ body {
   }
 }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
 ::-webkit-scrollbar {
   display: none;
+}
+
+.masonry-layout {
+  margin-top: 8px;
+  columns: 3;
+  break-inside: avoid;
+  column-gap: 20px;
+  box-sizing: content-box;
+}
+
+.masonry-layout .photo-container {
+  overflow: hidden;
+  position: relative;
+  background-color: #00000020;
+  margin-bottom: 10px;
+  width: 100%;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.photo-container img {
+  width: 100%;
+  object-fit: contain;
+  margin-bottom: -8px;
+}
+
+.photo-container .label {
+  position: absolute;
+  bottom: 10px;
+  left: -100%;
+  opacity: 0;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  max-width: 80%;
+  text-decoration: none;
+}
+
+.photo-container:hover .label {
+  opacity: 1;
+  left: 12px;
+}
+
+.photo-container .label:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
+.photo-container button {
+  position: absolute;
+  top: 10px;
+  right: -100%;
+  opacity: 0;
+  border-radius: 999px;
+  padding: 5px 8px;
+  border: 2px solid #eb5757;
+  outline: none;
+  color: #eb5757;
+  background-color: transparent;
+  font-weight: 700;
+}
+
+.photo-container:hover button {
+  opacity: 1;
+  right: 10px;
+}
+
+.photo-container button:hover {
+  color: white;
+  cursor: pointer;
+  background-color: #eb5757;
+  transform: scale(1.1);
+}
+
+.photo-container .say-no-to-clean-code {
+  width: 100%;
+  background-color: #00000000;
+}
+
+.photo-container:hover .say-no-to-clean-code {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000000b0;
+  backdrop-filter: blur(3px);
+}
+
+.loading-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000000b0;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loading-container .loading-spiner {
+  font-size: 70px;
+  animation: spin 1.5s linear infinite;
+}
+
+.loading-container .loading-status {
+  font-size: 1rem;
 }

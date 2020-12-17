@@ -35,22 +35,33 @@ passport.use(
 );
 
 router.post("/signup", require("../functions/signup"));
+
 router.post("/login", require("../functions/login"));
+
 router.post(
   "/photos/pc",
   [upload.single("image"), passport.authenticate("jwt", { session: false })],
   require("../functions/postPhotoFromPc")
 );
+
 router.post(
   "/photos/url",
   [upload.single("image"), passport.authenticate("jwt", { session: false })],
   require("../functions/postPhotoFromUrl")
 );
+
+router.post(
+  "/accounts/check-password",
+  passport.authenticate("jwt", { session: false }),
+  require("../functions/checkPassword")
+);
+
 router.get(
   "/photos",
   passport.authenticate("jwt", { session: false }),
   require("../functions/getPhotos")
 );
+
 router.delete(
   "/photos/:photoId",
   passport.authenticate("jwt", { session: false }),
